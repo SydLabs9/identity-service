@@ -1,16 +1,13 @@
 spring:
-  datasource:
-    url: jdbc:h2:mem:identitydb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
+  profiles:
+    default: dev
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     open-in-view: false
-  h2:
-    console:
-      enabled: true
+  liquibase:
+    enabled: true
+    change-log: file:database/liquibase/db.changelog-master.yaml
 
 server:
   error:

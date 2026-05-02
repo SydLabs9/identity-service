@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 class AuthControllerIntegrationTest {
 
     @Autowired
@@ -107,6 +109,38 @@ class AuthControllerIntegrationTest {
             """;
 
         mockMvc.perform(post("/api/auth/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(invalidBody))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.message").value("Validation failed"));
+    }
+
+    @Test
+    void unknownEmailLoginReturnsUnauthorized() throws Exception {
+        String loginBody = """
+            {
+              "email": "nobody@example.com",
+              "password": "any-password-here"
+            }
+            """;
+
+        mockMvc.perform(post("/api/auth/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(loginBody))
+            .andExpect(status().isUnauthorized())
+            .andExpect(jsonPath("$.message").value("Invalid credentials"));
+    }
+
+    @Test
+    void invalidLoginPayloadReturnsBadRequest() throws Exception {
+        String invalidBody = """
+            {
+              "email": "not-an-email",
+              "password": "secret"
+            }
+            """;
+
+        mockMvc.perform(post("/api/auth/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(invalidBody))
             .andExpect(status().isBadRequest())

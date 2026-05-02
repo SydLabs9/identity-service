@@ -2,6 +2,8 @@
 
 Generic, extensible identity service foundation built with Java and Spring Boot.
 
+**Architecture docs:** see the [docs/](docs/README.md) folder (overview, application design, data and ops).
+
 ## Why this service exists
 
 This service is designed to centralize identity and authentication concerns while allowing security mechanisms to evolve over time.
@@ -11,24 +13,9 @@ The core idea is:
 - Keep the identity domain stable (`User`, lifecycle, credentials state).
 - Add authentication and protocol mechanisms as pluggable adapters.
 - Let consumer services trust contracts (tokens/claims in later phases), not raw credentials.
+- Bundling versus splitting deployments: see [docs/overview.md](docs/overview.md).
 
-## Should identity capabilities be bundled together?
-
-Bundling is a good starting model when:
-
-- one team owns identity capabilities end to end,
-- release cadence is shared,
-- operational simplicity is a priority.
-
-Split into multiple services later when:
-
-- protocols diverge significantly (for example separate OAuth2 Authorization Server needs),
-- compliance boundaries require isolation,
-- scaling patterns differ enough to justify independent deployment.
-
-Recommended current approach: start bundled with strict module boundaries, then split only with clear operational need.
-
-## Implemented now (Phase 1)
+## Implemented now (Phase 1 + Phase 2A)
 
 - Spring Boot 3 + Java 21 + Gradle foundation.
 - Registration endpoint: `POST /api/auth/register`.
@@ -36,6 +23,13 @@ Recommended current approach: start bundled with strict module boundaries, then 
 - BCrypt password hashing and verification.
 - Validation and API error handling (`400`, `401`, `409`).
 - Integration tests for happy and negative auth flows.
+- Unit tests for `UserService` (register/authenticate branches).
+- Docker image and Compose stack to run the app with PostgreSQL (see **Docker** under Run locally).
+- Liquibase-managed schema migrations.
+- PostgreSQL-first datasource configuration via Spring profiles (`dev`, `prod`).
+- PostgreSQL-backed smoke tests with Testcontainers (`AuthControllerPostgresIntegrationTest`) when Docker is available.
+- Aurora PostgreSQL grants/runbook assets under `database/aurora/`.
+
 
 ## Planned next (not implemented yet)
 
@@ -44,26 +38,11 @@ Recommended current approach: start bundled with strict module boundaries, then 
 - JWKS endpoint for consumer service token verification.
 - Protected route example (`/api/me`).
 - GitHub Actions CI workflow.
-- AWS deployment documentation baseline.
+- broader AWS deployment automation baseline.
 
 ## Extensibility model
 
-Current extension seam:
-
-- `Authenticator` interface at `src/main/java/com/example/identity/auth/Authenticator.java`
-- `PasswordAuthenticator` implementation at `src/main/java/com/example/identity/auth/PasswordAuthenticator.java`
-
-Contribution path for new auth/security mechanisms:
-
-1. Add a new authenticator/provider (for example MFA challenge authenticator, federated authenticator, passwordless authenticator).
-2. Wire request DTOs and routing only as needed, without breaking existing endpoints.
-3. Add tests for success and failure paths.
-4. Update docs and changelog with clear implemented scope.
-
-Guideline:
-
-- Extend existing module when behavior fits current auth contract.
-- Introduce a new module/package when protocol or lifecycle concerns differ substantially.
+Plug in credential verification via **`Authenticator`** / **`PasswordAuthenticator`**. Contribution flow and layering: [docs/application-architecture.md](docs/application-architecture.md).
 
 ## API quickstart
 
@@ -116,17 +95,59 @@ Response (`200 OK`):
 Prerequisites:
 
 - Java 21
+- PostgreSQL 14+ (for running the app locally with profile `dev`, or rely on Compose below)
 
 Commands:
 
 - `./gradlew bootRun`
-- `./gradlew test`
+- `./gradlew test` — primary suite uses profile `test` (H2). Optional [`AuthControllerPostgresIntegrationTest`](src/test/java/com/example/identity/auth/AuthControllerPostgresIntegrationTest.java) exercises PostgreSQL + Liquibase via **Testcontainers** when Docker is available; skipped otherwise.
 
-Default dev data store is in-memory H2 configured in `src/main/resources/application.yml`.
+### Docker (app + PostgreSQL)
 
-## Current package layout
+Prerequisites:
 
-- `com.example.identity.config` - security configuration (`SecurityFilterChain`, password encoder)
-- `com.example.identity.user` - user entity, repository, and domain service
-- `com.example.identity.auth` - auth API, DTOs, exceptions, authenticator abstraction
-- `com.example.identity.web` - global API exception mapping
+- Docker with Compose v2
+
+From the repo root:
+
+- `docker compose up --build`
+
+This builds the [`Dockerfile`](Dockerfile) image, starts [`postgres`](docker-compose.yml) with a healthcheck, then starts the identity service once the database is ready. The app listens on host port **8080** and uses profile `dev` with:
+
+- `DB_URL=jdbc:postgresql://postgres:5432/identity_service` (host `postgres` is the Compose service name)
+- `DB_USERNAME` / `DB_PASSWORD`: `identity_app` (matching the Postgres container defaults)
+
+Liquibase changelog files are copied into the image under `database/` so `file:database/liquibase/...` resolves at runtime.
+
+With profile `dev` and no Compose overrides (local Postgres or similar), JDBC defaults are:
+
+- `DB_URL` — default `jdbc:postgresql://localhost:5432/identity_service`
+- `DB_USERNAME` — default `identity_app`
+- `DB_PASSWORD` — default `identity_app`
+
+## Database migrations and profiles
+
+- Liquibase changelog master:
+  - `database/liquibase/db.changelog-master.yaml`
+- Initial changesets:
+  - `database/liquibase/changes/001-create-users-table.yaml`
+  - `database/liquibase/changes/002-add-users-indexes.yaml`
+
+Profile configuration:
+
+- `application-dev.yml`: local PostgreSQL
+- `application-prod.yml`: Aurora/PostgreSQL connection via environment variables
+- `application-test.yml`: H2 for the default `./gradlew test` suite
+- Postgres + Liquibase: also covered by [`AuthControllerPostgresIntegrationTest`](src/test/java/com/example/identity/auth/AuthControllerPostgresIntegrationTest.java) when Docker is running
+
+JPA is configured with `ddl-auto=validate`; schema evolution is managed by Liquibase.
+
+## Aurora PostgreSQL grants
+
+Aurora SQL assets are included for DBA/app-user provisioning:
+
+- `database/aurora/grants.sql`
+- `database/aurora/README.md`
+- `database/README.md` (schema summary, ER diagram, and extension model)
+
+Use these to create app role/user permissions and wire production env vars for the `prod` profile.

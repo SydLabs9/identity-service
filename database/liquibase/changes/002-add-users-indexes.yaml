@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-add-users-indexes
+      author: sydlab
+      changes:
+        - createIndex:
+            tableName: users
+            indexName: idx_users_email
+            columns:
+              - column:
+                  name: email

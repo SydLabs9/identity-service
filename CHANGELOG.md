@@ -22,6 +22,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - duplicate email conflict
   - invalid password unauthorized response
   - invalid payload bad request response
+- Added Liquibase migration framework and changelog structure for schema management.
+- Added PostgreSQL runtime driver and profile-based datasource configuration (`dev`, `prod`, `test`).
+- Added initial DB migrations for `users` table and email index.
+- Added Aurora PostgreSQL grants script and operations runbook:
+  - `database/aurora/grants.sql`
+  - `database/aurora/README.md`
+- Docker (`Dockerfile`, `.dockerignore`, `docker-compose.yml`) to build and run the app with PostgreSQL and health-checked startup.
+- Architecture documentation under `docs/`, including Level 0 and future-platform diagrams.
+- `UserServiceTest` unit tests for register/authenticate branches.
+- Additional auth integration cases (unknown user login, invalid login payload).
+- PostgreSQL-backed smoke tests via Testcontainers (`AuthControllerPostgresIntegrationTest`), skipping when Docker is unavailable.
 
 ### Planned (not shipped yet)
 
