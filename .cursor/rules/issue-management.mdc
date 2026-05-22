@@ -16,7 +16,7 @@ When the user asks to implement work, assume it maps to a GitHub Issue unless th
 
 ## While working
 
-- Reference the issue in commit messages: `feat(auth): JWT issuer (#4)`
+- Reference the issue in commit messages: `feat(auth): JWT issuer (#15)`
 - Update `CHANGELOG.md` under `[Unreleased]` for user-visible changes.
 - Do not close issues until tests pass and the user agrees the scope is done.
 
@@ -38,7 +38,7 @@ When the user asks to implement work, assume it maps to a GitHub Issue unless th
 ## Scope guardrails (generic auth/authz service)
 
 - **Authentication** (credentials, tokens, JWKS) before **authorization** (roles, clients, policies).
-- Do not implement OAuth2/OIDC gateway (#10) before JWT baseline (#4–#7) unless the user explicitly reprioritizes.
+- Do not implement OAuth2/OIDC gateway (#21) before JWT baseline (#15–#18) unless the user explicitly reprioritizes.
 - Prefer incremental releases (SemVer) over large unreviewable diffs.
 
 ## Useful commands
@@ -46,6 +46,6 @@ When the user asks to implement work, assume it maps to a GitHub Issue unless th
 ```bash
 gh issue list -R SydLabs9/identity-service --state open
 gh issue list -R SydLabs9/identity-service --label auth --state open
-gh issue view 4 -R SydLabs9/identity-service
-gh pr create --base dev --head feature/4-jwt --title "feat(auth): JWT access tokens (#4)"
+gh issue view 15 -R SydLabs9/identity-service
+gh pr create --base dev --head feature/15-jwt --title "feat(auth): JWT access tokens (#15)"
 ```
