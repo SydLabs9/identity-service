@@ -17,3 +17,4 @@ Implementation runbooks and API examples stay in the [root README](../README.md)
 | [Application architecture](application-architecture.md) | Layers, flows, security, errors, `Authenticator` seam |
 | [Data and operations](data-and-operations.md) | Schema, Liquibase, profiles, Docker |
 | [Release process](RELEASE.md) | `dev` → `main`, SemVer tags, GitHub Releases |
+| [Roadmap](ROADMAP.md) | Shipped vs planned work, issue links, project board |

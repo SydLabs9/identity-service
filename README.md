@@ -1,6 +1,8 @@
 # Identity Service
 
-Generic, extensible identity service foundation built with Java and Spring Boot.
+Generic, extensible **authentication and authorization** service foundation built with Java and Spring Boot.
+
+**Tracking:** [Roadmap](docs/ROADMAP.md) · [GitHub Issues](https://github.com/sydlab/identity-service/issues) · [SydLabs9 project board](https://github.com/orgs/SydLabs9/projects/1/views/1)
 
 **Architecture docs:** see the [docs/](docs/README.md) folder (overview, application design, data and ops).
 
@@ -44,12 +46,11 @@ The core idea is:
 
 ## Planned next (not implemented yet)
 
-- `POST /api/auth/refresh`.
-- JWT access/refresh issuance and validation contracts.
-- JWKS endpoint for consumer service token verification.
-- Protected route example (`/api/me`).
-- GitHub Actions CI workflow (build and test).
-- broader AWS deployment automation baseline.
+Tracked as GitHub Issues — full table in [docs/ROADMAP.md](docs/ROADMAP.md).
+
+- **v0.4.0 milestone:** JWT access/refresh, JWKS, protected `/api/me` ([#4](https://github.com/sydlab/identity-service/issues/4)–[#7](https://github.com/sydlab/identity-service/issues/7))
+- **Infra:** CI on PR ([#8](https://github.com/sydlab/identity-service/issues/8)), enable Pages ([#11](https://github.com/sydlab/identity-service/issues/11))
+- **Later authz / protocols:** roles & clients ([#9](https://github.com/sydlab/identity-service/issues/9)), OAuth2/OIDC epic ([#10](https://github.com/sydlab/identity-service/issues/10))
 
 ## Extensibility model
 
