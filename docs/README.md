@@ -16,3 +16,4 @@ Implementation runbooks and API examples stay in the [root README](../README.md)
 | [Overview](overview.md) | Goals, what is in scope today vs later |
 | [Application architecture](application-architecture.md) | Layers, flows, security, errors, `Authenticator` seam |
 | [Data and operations](data-and-operations.md) | Schema, Liquibase, profiles, Docker |
+| [Release process](RELEASE.md) | `dev` → `main`, SemVer tags, GitHub Releases |

@@ -12,3 +12,11 @@ spring:
 server:
   error:
     include-message: always
+
+springdoc:
+  swagger-ui:
+    enabled: true
+  api-docs:
+    enabled: true
+  paths-to-match: /api/**
+  packages-to-scan: com.example.identity.auth

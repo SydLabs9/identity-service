@@ -64,17 +64,14 @@ At minimum, cover:
 
 Prefer integration tests for endpoint behavior and contract checks.
 
-## Branching and commits
+## Branching, releases, and commits
 
-Recommended:
-
+- **`dev`** — day-to-day integration (feature PRs land here).
+- **`main`** — stable; each merge gets a **SemVer tag** and CHANGELOG section (see [docs/RELEASE.md](docs/RELEASE.md)).
 - Branch naming: `feature/<short-name>`, `fix/<short-name>`, `chore/<short-name>`
-- Commit messages: concise, imperative, and scoped to one concern.
+- Commit messages: concise, imperative, scoped (`feat(auth): …`, `docs: …`).
 
-Example:
-
-- `feat(auth): add refresh token endpoint`
-- `docs: clarify extension model in README`
+Before merging to **`main`**, move CHANGELOG items from **`[Unreleased]`** into a versioned heading with a one-line **Theme**.
 
 ## Pull request checklist
 

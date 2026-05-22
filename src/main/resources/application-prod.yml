@@ -7,3 +7,7 @@ spring:
 
   # Aurora PostgreSQL commonly enforces SSL; keep it explicit in production JDBC URL.
   # Example: jdbc:postgresql://cluster-endpoint:5432/identity_service?sslmode=require
+
+springdoc:
+  swagger-ui:
+    enabled: false

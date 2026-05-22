@@ -4,6 +4,16 @@ Generic, extensible identity service foundation built with Java and Spring Boot.
 
 **Architecture docs:** see the [docs/](docs/README.md) folder (overview, application design, data and ops).
 
+**Releases:** stable tags on **`main`** — see [CHANGELOG.md](CHANGELOG.md) and [docs/RELEASE.md](docs/RELEASE.md).
+
+| Version | Theme |
+|---------|--------|
+| [v0.3.0](https://github.com/sydlab/identity-service/releases/tag/v0.3.0) | Published OpenAPI / Redoc (GitHub Pages) |
+| [v0.2.0](https://github.com/sydlab/identity-service/releases/tag/v0.2.0) | Database-backed identity (Postgres, Liquibase, Docker) |
+| [v0.1.0](https://github.com/sydlab/identity-service/releases/tag/v0.1.0) | Auth foundation (register / login) |
+
+Development branch: **`dev`**. Default integration PRs target **`dev`**; release PRs merge **`dev` → `main`**.
+
 ## Why this service exists
 
 This service is designed to centralize identity and authentication concerns while allowing security mechanisms to evolve over time.
@@ -29,7 +39,8 @@ The core idea is:
 - PostgreSQL-first datasource configuration via Spring profiles (`dev`, `prod`).
 - PostgreSQL-backed smoke tests with Testcontainers (`AuthControllerPostgresIntegrationTest`) when Docker is available.
 - Aurora PostgreSQL grants/runbook assets under `database/aurora/`.
-
+- SpringDoc OpenAPI (`/v3/api-docs`, Swagger UI except in `prod`) and **`./gradlew openapi`** to emit `build/openapi/openapi.json`.
+- Redocly + GitHub Actions workflow publishing static API docs to GitHub Pages (see **OpenAPI and API documentation** below).
 
 ## Planned next (not implemented yet)
 
@@ -37,7 +48,7 @@ The core idea is:
 - JWT access/refresh issuance and validation contracts.
 - JWKS endpoint for consumer service token verification.
 - Protected route example (`/api/me`).
-- GitHub Actions CI workflow.
+- GitHub Actions CI workflow (build and test).
 - broader AWS deployment automation baseline.
 
 ## Extensibility model
@@ -89,6 +100,13 @@ Response (`200 OK`):
   "email": "user@example.com"
 }
 ```
+
+## OpenAPI and API documentation
+
+- **JSON spec** (runtime): `GET /v3/api-docs` (while the app is running).
+- **Export for tooling / CI**: `./gradlew openapi` writes `build/openapi/openapi.json`.
+- **Swagger UI**: `http://localhost:8080/swagger-ui/index.html` when not using the `prod` profile (`springdoc.swagger-ui.enabled` is `false` in [`application-prod.yml`](src/main/resources/application-prod.yml)).
+- **Published Redoc (GitHub Pages)**: workflow [`.github/workflows/openapi-pages.yml`](.github/workflows/openapi-pages.yml) runs on pushes to `dev` and `main`. In the repo **Settings → Pages**, set **Build and deployment** source to **GitHub Actions**. The site URL is usually `https://<owner>.github.io/<repo>/` (for example `https://sydlab.github.io/identity-service/`).
 
 ## Run locally
 

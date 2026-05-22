@@ -1,0 +1,11 @@
+extends:
+  - recommended
+
+rules:
+  # Register/login endpoints are deliberately anonymous until token flows exist.
+  security-defined: off
+  no-empty-servers: warn
+
+apis:
+  exported:
+    root: build/openapi/openapi.json
