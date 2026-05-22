@@ -1,0 +1,51 @@
+---
+description: GitHub issue and release workflow for identity-service
+alwaysApply: true
+---
+
+# Issue-driven development (identity-service)
+
+When the user asks to implement work, assume it maps to a GitHub Issue unless they say otherwise.
+
+## Before coding
+
+1. Identify the issue: `gh issue view <n> -R SydLabs9/identity-service`
+2. Confirm labels (`auth`, `authz`, `infrastructure`, `documentation`) and milestone (e.g. v0.4.0).
+3. Branch from `dev`: `feature/<issue-n>-<short-name>` or `fix/<issue-n>-<short-name>`
+   - PR target: **`SydLabs9/identity-service:dev`** (from personal fork if applicable)
+
+## While working
+
+- Reference the issue in commit messages: `feat(auth): JWT issuer (#4)`
+- Update `CHANGELOG.md` under `[Unreleased]` for user-visible changes.
+- Do not close issues until tests pass and the user agrees the scope is done.
+
+## After merge-ready work
+
+1. Open PR to `dev` (template reminds CHANGELOG + tests).
+2. Comment on the issue with what shipped and link the PR:
+   `gh issue comment <n> -R SydLabs9/identity-service --body "..."`
+3. Close only when acceptance criteria are met:
+   `gh issue close <n> -R SydLabs9/identity-service`
+4. For release milestones: move `[Unreleased]` → version section in CHANGELOG, merge `dev` → `main`, tag, `gh release create`.
+
+## Roadmap and project board
+
+- Keep [docs/ROADMAP.md](docs/ROADMAP.md) and [product/SCOPE.md](product/SCOPE.md) in sync when priorities or issue numbers change.
+- Org board: https://github.com/orgs/SydLabs9/projects/1/views/1 — remind user to move cards (Done / In Progress) if CLI lacks `project` scope.
+- To add issues via CLI: `gh auth refresh -s read:project,project` then `gh project item-add 1 --owner SydLabs9 --url <issue-url>`
+
+## Scope guardrails (generic auth/authz service)
+
+- **Authentication** (credentials, tokens, JWKS) before **authorization** (roles, clients, policies).
+- Do not implement OAuth2/OIDC gateway (#10) before JWT baseline (#4–#7) unless the user explicitly reprioritizes.
+- Prefer incremental releases (SemVer) over large unreviewable diffs.
+
+## Useful commands
+
+```bash
+gh issue list -R SydLabs9/identity-service --state open
+gh issue list -R SydLabs9/identity-service --label auth --state open
+gh issue view 4 -R SydLabs9/identity-service
+gh pr create --base dev --head feature/4-jwt --title "feat(auth): JWT access tokens (#4)"
+```

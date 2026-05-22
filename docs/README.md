@@ -13,6 +13,7 @@ Implementation runbooks and API examples stay in the [root README](../README.md)
 
 | Doc | Contents |
 |-----|----------|
+| [Product vision & scope](../product/README.md) | Why we build this, phased scope, non-goals |
 | [Overview](overview.md) | Goals, what is in scope today vs later |
 | [Application architecture](application-architecture.md) | Layers, flows, security, errors, `Authenticator` seam |
 | [Data and operations](data-and-operations.md) | Schema, Liquibase, profiles, Docker |

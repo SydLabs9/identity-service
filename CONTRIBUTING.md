@@ -2,6 +2,12 @@
 
 Thanks for contributing to the Identity Service.
 
+**Canonical repo:** [SydLabs9/identity-service](https://github.com/SydLabs9/identity-service) — **`main`** (stable releases), **`dev`** (integration).
+
+**Personal fork workflow:** develop on [sydlab/identity-service](https://github.com/sydlab/identity-service) (or your fork), then open a PR **`your-fork:dev` → `SydLabs9/identity-service:dev`**. Release merges go **`dev` → `main`** on the org repo only.
+
+See [product/SCOPE.md](product/SCOPE.md) for phased acceptance criteria.
+
 This project is intentionally designed to be extensible. Please preserve clear boundaries between:
 
 - identity domain (`user` package),

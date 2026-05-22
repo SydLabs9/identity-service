@@ -2,17 +2,17 @@
 
 Generic, extensible **authentication and authorization** service foundation built with Java and Spring Boot.
 
-**Tracking:** [Roadmap](docs/ROADMAP.md) · [GitHub Issues](https://github.com/sydlab/identity-service/issues) · [SydLabs9 project board](https://github.com/orgs/SydLabs9/projects/1/views/1)
+**Tracking:** [Vision & scope](product/README.md) · [Roadmap](docs/ROADMAP.md) · [GitHub Issues](https://github.com/SydLabs9/identity-service/issues) · [SydLabs9 project board](https://github.com/orgs/SydLabs9/projects/1/views/1)
 
-**Architecture docs:** see the [docs/](docs/README.md) folder (overview, application design, data and ops).
+**Product:** [product/](product/README.md) (vision, scope) · **Architecture:** [docs/](docs/README.md) (overview, application design, data and ops).
 
 **Releases:** stable tags on **`main`** — see [CHANGELOG.md](CHANGELOG.md) and [docs/RELEASE.md](docs/RELEASE.md).
 
 | Version | Theme |
 |---------|--------|
-| [v0.3.0](https://github.com/sydlab/identity-service/releases/tag/v0.3.0) | Published OpenAPI / Redoc (GitHub Pages) |
-| [v0.2.0](https://github.com/sydlab/identity-service/releases/tag/v0.2.0) | Database-backed identity (Postgres, Liquibase, Docker) |
-| [v0.1.0](https://github.com/sydlab/identity-service/releases/tag/v0.1.0) | Auth foundation (register / login) |
+| [v0.3.0](https://github.com/SydLabs9/identity-service/releases/tag/v0.3.0) | Published OpenAPI / Redoc (GitHub Pages) |
+| [v0.2.0](https://github.com/SydLabs9/identity-service/releases/tag/v0.2.0) | Database-backed identity (Postgres, Liquibase, Docker) |
+| [v0.1.0](https://github.com/SydLabs9/identity-service/releases/tag/v0.1.0) | Auth foundation (register / login) |
 
 Development branch: **`dev`**. Default integration PRs target **`dev`**; release PRs merge **`dev` → `main`**.
 
@@ -48,9 +48,9 @@ The core idea is:
 
 Tracked as GitHub Issues — full table in [docs/ROADMAP.md](docs/ROADMAP.md).
 
-- **v0.4.0 milestone:** JWT access/refresh, JWKS, protected `/api/me` ([#4](https://github.com/sydlab/identity-service/issues/4)–[#7](https://github.com/sydlab/identity-service/issues/7))
-- **Infra:** CI on PR ([#8](https://github.com/sydlab/identity-service/issues/8)), enable Pages ([#11](https://github.com/sydlab/identity-service/issues/11))
-- **Later authz / protocols:** roles & clients ([#9](https://github.com/sydlab/identity-service/issues/9)), OAuth2/OIDC epic ([#10](https://github.com/sydlab/identity-service/issues/10))
+- **v0.4.0 milestone:** JWT access/refresh, JWKS, protected `/api/me` ([#4](https://github.com/SydLabs9/identity-service/issues/4)–[#7](https://github.com/SydLabs9/identity-service/issues/7))
+- **Infra:** CI on PR ([#8](https://github.com/SydLabs9/identity-service/issues/8)), enable Pages ([#11](https://github.com/SydLabs9/identity-service/issues/11))
+- **Later authz / protocols:** roles & clients ([#9](https://github.com/SydLabs9/identity-service/issues/9)), OAuth2/OIDC epic ([#10](https://github.com/SydLabs9/identity-service/issues/10))
 
 ## Extensibility model
 

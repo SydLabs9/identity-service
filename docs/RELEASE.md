@@ -51,8 +51,8 @@ Or use **Releases → Draft a new release** in the GitHub UI and paste the CHANG
 
 | Tag | Theme |
 |-----|--------|
-| [v0.1.0](https://github.com/sydlab/identity-service/releases/tag/v0.1.0) | Auth foundation (register/login) |
-| [v0.2.0](https://github.com/sydlab/identity-service/releases/tag/v0.2.0) | Database-backed identity (Postgres, Liquibase, Docker) |
-| [v0.3.0](https://github.com/sydlab/identity-service/releases/tag/v0.3.0) | Published OpenAPI / Redoc on GitHub Pages |
+| [v0.1.0](https://github.com/SydLabs9/identity-service/releases/tag/v0.1.0) | Auth foundation (register/login) |
+| [v0.2.0](https://github.com/SydLabs9/identity-service/releases/tag/v0.2.0) | Database-backed identity (Postgres, Liquibase, Docker) |
+| [v0.3.0](https://github.com/SydLabs9/identity-service/releases/tag/v0.3.0) | Published OpenAPI / Redoc on GitHub Pages |
 
-Roadmap items not in a tag yet live in [ROADMAP.md](ROADMAP.md) and [GitHub Issues](https://github.com/sydlab/identity-service/issues).
+Roadmap items not in a tag yet live in [ROADMAP.md](ROADMAP.md) and [GitHub Issues](https://github.com/SydLabs9/identity-service/issues).
