@@ -48,9 +48,9 @@ The core idea is:
 
 Tracked as GitHub Issues — full table in [docs/ROADMAP.md](docs/ROADMAP.md).
 
-- **v0.4.0 milestone:** JWT access/refresh, JWKS, protected `/api/me` ([#15](https://github.com/SydLabs9/identity-service/issues/15)–[#18](https://github.com/SydLabs9/identity-service/issues/18))
-- **Infra:** CI on PR ([#19](https://github.com/SydLabs9/identity-service/issues/19)), enable Pages ([#22](https://github.com/SydLabs9/identity-service/issues/22))
-- **Later authz / protocols:** roles & clients ([#20](https://github.com/SydLabs9/identity-service/issues/20)), OAuth2/OIDC epic ([#21](https://github.com/SydLabs9/identity-service/issues/21))
+- **v0.4.0 milestone:** JWT access/refresh, JWKS, protected `/api/me` ([#4](https://github.com/SydLabs9/identity-service/issues/4)–[#7](https://github.com/SydLabs9/identity-service/issues/7))
+- **Infra:** CI on PR ([#8](https://github.com/SydLabs9/identity-service/issues/8)), enable Pages ([#11](https://github.com/SydLabs9/identity-service/issues/11))
+- **Later authz / protocols:** roles & clients ([#9](https://github.com/SydLabs9/identity-service/issues/9)), OAuth2/OIDC epic ([#10](https://github.com/SydLabs9/identity-service/issues/10))
 
 ## Extensibility model
 

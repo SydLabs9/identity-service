@@ -16,7 +16,7 @@ What the Identity Service **will** and **will not** deliver, by phase. Implement
 | **AuthN (password)** | Register, login, BCrypt verification via `Authenticator` seam |
 | **Identity store** | Postgres + Liquibase `users` table; H2 for tests |
 | **Ops** | Docker Compose stack, `dev` / `prod` / `test` profiles |
-| **Contract** | OpenAPI export, Redocly lint, GitHub Pages workflow (enable Pages: [#22](https://github.com/SydLabs9/identity-service/issues/22)) |
+| **Contract** | OpenAPI export, Redocly lint, GitHub Pages workflow (enable Pages: [#11](https://github.com/SydLabs9/identity-service/issues/11)) |
 | **Quality** | Integration tests (H2 + Testcontainers Postgres), unit tests on services |
 | **Process** | SemVer tags on **`main`**, CHANGELOG themes, roadmap + issues |
 
@@ -39,7 +39,7 @@ What the Identity Service **will** and **will not** deliver, by phase. Implement
 
 ## Level 1 — Tokens (target: v0.4.0)
 
-Issues: [#15](https://github.com/SydLabs9/identity-service/issues/15)–[#18](https://github.com/SydLabs9/identity-service/issues/18) · Milestone: [v0.4.0](https://github.com/SydLabs9/identity-service/milestone/1)
+Issues: [#4](https://github.com/SydLabs9/identity-service/issues/4)–[#7](https://github.com/SydLabs9/identity-service/issues/7) · Milestone: [v0.4.0](https://github.com/SydLabs9/identity-service/milestone/1)
 
 ### In scope
 
@@ -58,8 +58,8 @@ Issues: [#15](https://github.com/SydLabs9/identity-service/issues/15)–[#18](ht
 - [ ] Resource server can validate JWT using JWKS **without** shared secret in every service
 - [ ] Expired or tampered JWT → **401** on `/api/me`
 - [ ] Refresh endpoint issues new access token; invalid refresh → **401**
-- [ ] CHANGELOG **Theme** line + GitHub Release notes; issues #15–#18 closed
-- [ ] CI runs `./gradlew test` on PR ([#19](https://github.com/SydLabs9/identity-service/issues/19))
+- [ ] CHANGELOG **Theme** line + GitHub Release notes; issues #4–#7 closed
+- [ ] CI runs `./gradlew test` on PR ([#8](https://github.com/SydLabs9/identity-service/issues/8))
 
 ### Out of scope for v0.4.0
 
@@ -71,7 +71,7 @@ Issues: [#15](https://github.com/SydLabs9/identity-service/issues/15)–[#18](ht
 
 ## Level 2 — Authorization data (planned: v0.5.x–v0.9.x)
 
-Epic: [#20](https://github.com/SydLabs9/identity-service/issues/20)
+Epic: [#9](https://github.com/SydLabs9/identity-service/issues/9)
 
 ### In scope (directional)
 
@@ -82,7 +82,7 @@ Epic: [#20](https://github.com/SydLabs9/identity-service/issues/20)
 | **Policy hooks** | Extension points for “can user X do Y on resource Z” without hard-coding in controllers |
 | **Admin APIs** | CRUD for roles/clients (protected; exact shape TBD in issue) |
 
-### Acceptance criteria (draft — refine in #20)
+### Acceptance criteria (draft — refine in #9)
 
 - [ ] User can hold one or more roles persisted in Postgres
 - [ ] JWT includes role claims verifiable by downstream services
@@ -99,7 +99,7 @@ Epic: [#20](https://github.com/SydLabs9/identity-service/issues/20)
 
 ## Level 3 — Protocols (future: v1.0+)
 
-Epic: [#21](https://github.com/SydLabs9/identity-service/issues/21)
+Epic: [#10](https://github.com/SydLabs9/identity-service/issues/10)
 
 ### In scope (directional)
 
@@ -120,7 +120,7 @@ Epic: [#21](https://github.com/SydLabs9/identity-service/issues/21)
 
 | Area | In scope | Notes |
 |------|----------|-------|
-| **Infra** | CI, Docker, Pages, semver releases | [#19](https://github.com/SydLabs9/identity-service/issues/19), [#22](https://github.com/SydLabs9/identity-service/issues/22) |
+| **Infra** | CI, Docker, Pages, semver releases | [#8](https://github.com/SydLabs9/identity-service/issues/8), [#11](https://github.com/SydLabs9/identity-service/issues/11) |
 | **Documentation** | README, `docs/`, `product/`, OpenAPI, architecture PNGs | Keep vision/scope aligned when phases ship |
 | **Agent workflow** | Issue-driven development, PR template | See `.cursor/rules/issue-management.mdc` |
 
